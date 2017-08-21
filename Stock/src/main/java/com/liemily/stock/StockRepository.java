@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Emily Li on 23/07/2017.
  */
@@ -19,4 +21,12 @@ public interface StockRepository extends JpaRepository<Stock, String> {
     @Modifying
     @Query("UPDATE Stock SET volume = volume + ?2 WHERE symbol = ?1")
     int add(String stockSymbol, int volume);
+
+    @Modifying
+    @Query("UPDATE Stock SET value = ?2 WHERE symbol = ?1")
+    int updateValue(String stockSymbol, BigDecimal value);
+
+    @Modifying
+    @Query("UPDATE Stock SET volume = ?2 WHERE symbol = ?1")
+    int updateVolume(String stockSymbol, int volume);
 }
