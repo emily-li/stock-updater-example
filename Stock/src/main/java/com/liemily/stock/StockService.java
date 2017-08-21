@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 /**
@@ -41,7 +42,27 @@ public class StockService {
     public void add(String stockSymbol, int volume) throws InvalidStockException {
         boolean success = stockRepository.add(stockSymbol, volume) > 0;
         if (!success) {
-            String error = "Failed to add stock for stock symbol " + stockSymbol;
+            String error = "Failed to add stock for stock symbol " + stockSymbol + " as no stocks present with stock symbol " + stockSymbol;
+            logger.error(error);
+            throw new InvalidStockException(error);
+        }
+    }
+
+    @Transactional
+    public void updateValue(String stockSymbol, BigDecimal value) throws InvalidStockException {
+        boolean success = stockRepository.updateValue(stockSymbol, value) > 0;
+        if (!success) {
+            String error = "Failed to update stock for stock symbol " + stockSymbol + " as no stocks present with stock symbol " + stockSymbol;
+            logger.error(error);
+            throw new InvalidStockException(error);
+        }
+    }
+
+    @Transactional
+    public void updateVolume(String stockSymbol, int volume) throws InvalidStockException {
+        boolean success = stockRepository.updateVolume(stockSymbol, volume) > 0;
+        if (!success) {
+            String error = "Failed to update stock for stock symbol " + stockSymbol + " as no stocks present with stock symbol " + stockSymbol;
             logger.error(error);
             throw new InvalidStockException(error);
         }
