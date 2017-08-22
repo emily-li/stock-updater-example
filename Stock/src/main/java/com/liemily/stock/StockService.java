@@ -59,6 +59,11 @@ public class StockService {
     }
 
     @Transactional
+    public void save(Stock stock) {
+        stockRepository.save(stock);
+    }
+
+    @Transactional
     public void updateVolume(String stockSymbol, int volume) throws InvalidStockException {
         boolean success = stockRepository.updateVolume(stockSymbol, volume) > 0;
         if (!success) {
