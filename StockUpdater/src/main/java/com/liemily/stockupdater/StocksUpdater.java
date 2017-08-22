@@ -1,5 +1,6 @@
 package com.liemily.stockupdater;
 
+import com.liemily.stock.Stock;
 import com.liemily.stock.StockService;
 import com.liemily.stock.exceptions.InvalidStockException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,14 @@ import java.math.BigDecimal;
  */
 @Component
 @Lazy
-public class StockUpdater {
+public class StocksUpdater {
     private StockService stockService;
+    private StockGenerator stockGenerator;
 
     @Autowired
-    public StockUpdater(StockService stockService) {
+    public StocksUpdater(StockService stockService, StockGenerator stockGenerator) {
         this.stockService = stockService;
+        this.stockGenerator = stockGenerator;
     }
 
     void updateStockValue(String stockSymbol, BigDecimal value) throws InvalidStockException {
@@ -27,5 +30,10 @@ public class StockUpdater {
 
     void updateStockVolume(String stockSymbol, int volume) throws InvalidStockException {
         stockService.updateVolume(stockSymbol, volume);
+    }
+
+    void generateStock(String stockSymbol) {
+        Stock stock = stockGenerator.generateStock(stockSymbol);
+        stockService.save(stock);
     }
 }
