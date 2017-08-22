@@ -49,7 +49,11 @@ public class RandomStockGenerator implements StockGenerator {
     }
 
     @Override
-    public double modulateValue(double scaleFactor) {
-        return 0;
+    public double modulateValue(double initialValue) {
+        return initialValue * scaleFactor();
+    }
+
+    private double scaleFactor() {
+        return ThreadLocalRandom.current().nextDouble(0.9, 1);
     }
 }
