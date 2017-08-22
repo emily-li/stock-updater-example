@@ -64,4 +64,19 @@ public class StockGeneratorTest {
 
         assertNotEquals(generatedStock.getVolume(), newGeneratedStock.getVolume());
     }
+
+    @Test
+    public void testValueModulation() {
+        double initialValue = 5;
+        double modulatedValue = stockGenerator.modulateValue(initialValue);
+        assertNotEquals(modulatedValue, initialValue);
+    }
+
+    @Test
+    public void testValueModulationRandomised() {
+        double initialValue = 5;
+        double modulatedValue1 = stockGenerator.modulateValue(initialValue);
+        double modulatedValue2 = stockGenerator.modulateValue(initialValue);
+        assertNotEquals(modulatedValue1, modulatedValue2);
+    }
 }
