@@ -2,6 +2,7 @@ package com.liemily.stockupdater;
 
 import com.liemily.stock.Stock;
 import com.liemily.stock.StockRepository;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,9 +22,15 @@ public class StocksUpdaterAppTest {
     @Autowired
     private StockRepository stockRepository;
 
+    final String symbol = "SYM" + UUID.randomUUID();
+
+    @After
+    public void tearDown() {
+        stockRepository.delete(symbol);
+    }
+
     @Test
     public void testStockValueModulatesOverTime() throws Exception {
-        final String symbol = "SYM" + UUID.randomUUID();
         BigDecimal initialValue = BigDecimal.valueOf(1.23);
 
         stockRepository.save(new Stock(symbol, initialValue, 1));
