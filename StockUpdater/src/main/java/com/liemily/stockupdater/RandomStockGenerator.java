@@ -47,13 +47,4 @@ public class RandomStockGenerator implements StockGenerator {
     public int generateVolume(int min, int max) {
         return ThreadLocalRandom.current().nextInt(minVol, maxVol);
     }
-
-    @Override
-    public double modulateValue(double initialValue) {
-        return initialValue * scaleFactor();
-    }
-
-    private double scaleFactor() {
-        return ThreadLocalRandom.current().nextDouble(0.9, 1);
-    }
 }

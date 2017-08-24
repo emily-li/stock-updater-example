@@ -11,6 +11,4 @@ public interface StockGenerator {
     double generateValue(double min, double max);
 
     int generateVolume(int min, int max);
-
-    double modulateValue(double initialValue);
 }
