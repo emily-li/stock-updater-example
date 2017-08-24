@@ -40,7 +40,7 @@ public class RandomStockGenerator implements StockGenerator {
 
     @Override
     public double generateValue(double min, double max) {
-        return ThreadLocalRandom.current().nextDouble(minValue, maxValue);
+        return ThreadLocalRandom.current().nextDouble(min, max);
     }
 
     @Override
