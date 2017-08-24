@@ -36,6 +36,10 @@ public class Stock {
         return volume;
     }
 
+    public void setValue(BigDecimal value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Stock{" +

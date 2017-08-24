@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Emily Li on 23/07/2017.
@@ -64,6 +65,11 @@ public class StockService {
     }
 
     @Transactional
+    public void save(Iterable<Stock> stocks) {
+        stockRepository.save(stocks);
+    }
+
+    @Transactional
     public void updateVolume(String stockSymbol, int volume) throws InvalidStockException {
         boolean success = stockRepository.updateVolume(stockSymbol, volume) > 0;
         if (!success) {
@@ -76,6 +82,11 @@ public class StockService {
     @Transactional(readOnly = true)
     public Stock getStock(String stockSymbol) {
         return stockRepository.findOne(stockSymbol);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Stock> getStocks() {
+        return stockRepository.findAll();
     }
 
     @Transactional(readOnly = true)
