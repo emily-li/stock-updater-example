@@ -45,6 +45,6 @@ public class RandomStockGenerator implements StockGenerator {
 
     @Override
     public int generateVolume(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(minVol, maxVol);
+        return ThreadLocalRandom.current().nextInt(min, max);
     }
 }
